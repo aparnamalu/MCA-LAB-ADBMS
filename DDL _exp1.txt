@@ -1,0 +1,49 @@
+SQL> create table studentz(studentid number(4) primary key,studentname varchar(50),age number(2),department varchar(49));
+
+Table created.
+
+SQL> desc studentz;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ STUDENTID                                 NOT NULL NUMBER(4)
+ STUDENTNAME                                        VARCHAR2(50)
+ AGE                                                NUMBER(2)
+ DEPARTMENT                                         VARCHAR2(49)
+
+SQL> alter table studentz add email varchar(67);
+
+Table altered.
+
+SQL> desc studentz;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ STUDENTID                                 NOT NULL NUMBER(4)
+ STUDENTNAME                                        VARCHAR2(50)
+ AGE                                                NUMBER(2)
+ DEPARTMENT                                         VARCHAR2(49)
+ EMAIL                                              VARCHAR2(67)
+
+SQL> rename studentz to student_detailz;
+
+Table renamed.
+
+SQL> truncate table student_detailz;
+
+Table truncated.
+
+SQL> desc student_detailz;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ STUDENTID                                 NOT NULL NUMBER(4)
+ STUDENTNAME                                        VARCHAR2(50)
+ AGE                                                NUMBER(2)
+ DEPARTMENT                                         VARCHAR2(49)
+ EMAIL                                              VARCHAR2(67)
+
+SQL> drop table student_detailz;
+
+Table dropped.
+
+SQL> desc student_detailz;
+ERROR:
+ORA-04043: object student_detailz does not exist

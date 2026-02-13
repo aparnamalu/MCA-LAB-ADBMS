@@ -1,0 +1,104 @@
+SQL>  create table Studentz(id number(10) primary key,name varchar(20),age number(2),department varchar(20));
+
+Table created.
+
+SQL> desc Studentz;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(10)
+ NAME                                               VARCHAR2(20)
+ AGE                                                NUMBER(2)
+ DEPARTMENT                                         VARCHAR2(20)
+
+SQL>  alter table Studentz add email varchar(20);
+
+Table altered.
+
+SQL> desc Studentz;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(10)
+ NAME                                               VARCHAR2(20)
+ AGE                                                NUMBER(2)
+ DEPARTMENT                                         VARCHAR2(20)
+ EMAIL                                              VARCHAR2(20)
+
+
+SQL> rename Studentz to Student_detailz;
+
+Table renamed.
+
+SQL> desc Student_detailz;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(10)
+ NAME                                               VARCHAR2(20)
+ AGE                                                NUMBER(2)
+ DEPARTMENT                                         VARCHAR2(20)
+ EMAIL                                              VARCHAR2(20)
+
+SQL>  insert into Student_detailz values(1,'harikuttan',24,'commerce','sabhi343@gmaiul.com');
+
+1 row created.
+
+SQL>  insert into Student_detailz values(2,'srikuttan',29,'btech','sri12123@gmaiul.com');
+
+1 row created.
+
+SQL>  insert into Student_detailz values(3,'manikuttan',31,'bcom','mani466@gmaiul.com');
+
+1 row created.
+
+SQL>  insert into Student_detailz values(4,'jinukuttan',30,'bca','jinu77@gmaiul.com');
+
+1 row created.
+
+SQL> select*from Student_detailz;
+
+        ID NAME                        AGE DEPARTMENT
+---------- -------------------- ---------- --------------------
+EMAIL
+--------------------
+         1 harikuttan                   24 commerce
+sabhi343@gmaiul.com
+
+         2 srikuttan                    29 btech
+sri12123@gmaiul.com
+
+         3 manikuttan                   31 bcom
+mani466@gmaiul.com
+
+
+        ID NAME                        AGE DEPARTMENT
+---------- -------------------- ---------- --------------------
+EMAIL
+--------------------
+         4 jinukuttan                   30 bca
+jinu77@gmaiul.com
+
+
+SQL> update Student_detailz set age=32 where id=2;
+
+1 row updated.
+
+SQL> delete from Student_detailz where id=4;
+
+1 row deleted.
+
+SQL> select*from Student_detailz;
+
+        ID NAME                        AGE DEPARTMENT
+---------- -------------------- ---------- --------------------
+EMAIL
+--------------------
+         1 harikuttan                   24 commerce
+sabhi343@gmaiul.com
+
+         2 srikuttan                    32 btech
+sri12123@gmaiul.com
+
+         3 manikuttan                   31 bcom
+mani466@gmaiul.com
+
+
+SQL>

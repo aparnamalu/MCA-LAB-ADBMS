@@ -1,0 +1,158 @@
+SQL> create table customerxx(customerid int primary key,name varchar(50),city varchar(30));
+
+Table created.
+
+SQL> create table productxx(productid int primary key,productname varchar(50),price number(10),customerid int ,foreign key(customerid) references customerxx (customerid));
+
+Table created.
+
+
+SQL> insert into customerxx values(1,'Alice','kochi');
+
+1 row created.
+
+SQL> insert into customerxx values(2,'Babu','trivandrum');
+
+1 row created.
+
+SQL> insert into customerxx values(3,'Chitra','kollam');
+
+1 row created.
+
+SQL> insert into customerxx values(4,'Siva','kottayam');
+
+1 row created.
+
+SQL> insert into customerxx values(5,'Sandhya','Trivandrum');
+
+1 row created.
+
+SQL> insert into productxx values(101,'laptop','5500',1);
+
+1 row created.
+
+SQL> insert into productxx values(102,'mobile','15000',2);
+
+1 row created.
+
+SQL> insert into productxx values(103,'tablet','20000',3);
+
+1 row created.
+
+SQL> insert into productxx values(104,'printer','10000',4);
+
+1 row created.
+
+SQL> insert into productxx values(105,'monitor','12000',5);
+
+1 row created.
+
+
+SQL> select * from productxx;
+
+ PRODUCTID PRODUCTNAME                                             PRICE CUSTOMERID
+---------- -------------------------------------------------- ---------- ----------
+       101 laptop                                                   5500          1
+       102 mobile                                                  15000          2
+       103 tablet                                                  20000          3
+       104 printer                                                 10000          4
+       105 monitor                                                 12000          5
+
+SQL> select name,city from customerxx;
+
+NAME                                               CITY
+-------------------------------------------------- ------------------------------
+Alice                                              kochi
+Babu                                               trivandrum
+Chitra                                             kollam
+Siva                                               kottayam
+Sandhya                                            Trivandrum
+
+SQL> select *from customerxx where city ='kochi';
+
+CUSTOMERID NAME                                               CITY
+---------- -------------------------------------------------- ------------------------------
+         1 Alice                                              kochi
+
+SQL> select *from productxx where price > 15000;
+
+ PRODUCTID PRODUCTNAME                                             PRICE CUSTOMERID
+---------- -------------------------------------------------- ---------- ----------
+       103 tablet                                                  20000          3
+
+SQL> select customerid,count(*) as totalproducts from productxx group by customerid;
+
+CUSTOMERID TOTALPRODUCTS
+---------- -------------
+         1             1
+         2             1
+         4             1
+         5             1
+         3             1
+
+SQL> select customerid,avg(price) as avgprice from productxx group by customerid;
+
+CUSTOMERID   AVGPRICE
+---------- ----------
+         1       5500
+         2      15000
+         4      10000
+         5      12000
+         3      20000
+
+SQL> select customerid,avg(price) as avgprice from productxx group by customerid having avg(price)>12000;
+
+CUSTOMERID   AVGPRICE
+---------- ----------
+         2      15000
+         3      20000
+
+SQL> select * from productxx order by price asc;
+
+ PRODUCTID PRODUCTNAME                                             PRICE CUSTOMERID
+---------- -------------------------------------------------- ---------- ----------
+       101 laptop                                                   5500          1
+       104 printer                                                 10000          4
+       105 monitor                                                 12000          5
+       102 mobile                                                  15000          2
+       103 tablet                                                  20000          3
+
+
+
+SQL> select * from customerxx order by name desc;
+
+CUSTOMERID NAME                                               CITY
+---------- -------------------------------------------------- ------------------------------
+         4 Siva                                               kottayam
+         5 Sandhya                                            Trivandrum
+         3 Chitra                                             kollam
+         2 Babu                                               trivandrum
+         1 Alice                                              kochi
+
+SQL> select * from customerxx where customerid in (select customerid from productxx where price > 15000);
+
+CUSTOMERID NAME                                               CITY
+---------- -------------------------------------------------- ------------------------------
+         3 Chitra                                             kollam
+
+SQL> select * from productxx where price =(select max(price) from productxx);
+
+ PRODUCTID PRODUCTNAME                                             PRICE CUSTOMERID
+---------- -------------------------------------------------- ---------- ----------
+       103 tablet                                                  20000          3
+
+SQL> create view productcustomer as select p.productname,p.price,c.name as customername from productxx p join customerxx c on p.customerid=c.customerid;
+
+View created.
+
+SQL> select * from productcustomer;
+
+PRODUCTNAME                                             PRICE CUSTOMERNAME
+-------------------------------------------------- ---------- --------------------------------------------------
+laptop                                                   5500 Alice
+mobile                                                  15000 Babu
+tablet                                                  20000 Chitra
+printer                                                 10000 Siva
+monitor                                                 12000 Sandhya
+
+SQL>
